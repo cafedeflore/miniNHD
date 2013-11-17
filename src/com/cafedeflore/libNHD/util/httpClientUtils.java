@@ -51,6 +51,7 @@ public class httpClientUtils implements Runnable{
 			inputStream = httpResponse.getEntity().getContent();
 			result = changeInputStream(inputStream, encode);
 			System.out.println(result);
+			System.out.println("in the thread~~~~~~~~~~");
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

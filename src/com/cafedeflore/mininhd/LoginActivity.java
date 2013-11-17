@@ -6,6 +6,7 @@ import com.cafedeflore.mininhd.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +45,11 @@ public class LoginActivity extends Activity {
 				String pw=password.getText().toString().trim();
 				
 				nhdService.postRequest("http");
-				
+				Intent intent = new Intent();
+				intent.setClass(LoginActivity.this, HomeActivity.class);
+				System.out.println("starting new activity");
+				startActivity(intent);
+				finish();
 			}
 		});
 		
@@ -58,6 +63,7 @@ public class LoginActivity extends Activity {
 //					un = "cafedeflore";
 //					pw = "left1bank";
 					nhdService.login(un, pw);
+					
 					//new Thread(new httpClientUtils(un,pw,MainActivity.this )).start();
 				}
 			});

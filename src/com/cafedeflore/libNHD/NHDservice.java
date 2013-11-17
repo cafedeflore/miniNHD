@@ -2,10 +2,11 @@ package com.cafedeflore.libNHD;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Intent;
+
 import com.cafedeflore.libNHD.util.httpClientLoginUtils;
 import com.cafedeflore.libNHD.util.httpClientUtils;
 import com.cafedeflore.mininhd.MyApp;
-import com.google.inject.Inject;
 
 public class NHDservice {
 //	@Inject
@@ -20,9 +21,9 @@ public class NHDservice {
 	}
 	
 	public String postRequest(String path){
-		System.out.println(myApp.getPassword());
 		DefaultHttpClient client = myApp.getClient();
 		new Thread(new httpClientUtils("http://www.nexushd.org/torrents.php", client)).start();
+		System.out.println(myApp.getPassword());
 		return "";
 	}
 	
