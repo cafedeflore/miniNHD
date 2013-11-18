@@ -76,7 +76,7 @@ public class TorrentListPragment extends Fragment implements OnRefreshListener<L
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //
-//		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 //
 //		final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources()
 //				.getDisplayMetrics());
@@ -98,6 +98,15 @@ public class TorrentListPragment extends Fragment implements OnRefreshListener<L
 //		v.setText("CARD " + (1));
 //		
 //		fl.addView(mPullRefreshListView);
+		
+//		FrameLayout f1 = new FrameLayout(getActivity());
+//		f1.setLayoutParams(params);
+		System.out.println(mPullRefreshListView.getParent());
+//		f1.addView(mPullRefreshListView);
+		if(mPullRefreshListView.getParent()!=null){
+//			FrameLayout layout = mPullRefreshListView.getParent();
+			((ViewGroup)mPullRefreshListView.getParent()).removeView(mPullRefreshListView);
+		}
 		return mPullRefreshListView;
 	}
 	

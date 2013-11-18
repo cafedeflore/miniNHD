@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
@@ -35,6 +36,8 @@ public class HomeActivity extends FragmentActivity{
 	
 	private static Boolean isExit = false;
     private static Boolean hasTask = false;
+    
+    TorrentListPragment torrentlist = null;
     Timer tExit = new Timer();
     TimerTask task = new TimerTask() {
 
@@ -183,14 +186,27 @@ public class HomeActivity extends FragmentActivity{
 //			return SuperAwesomeCardFragment.newInstance(position);
 			switch(position){
 			case 0:
-				TorrentListPragment torrentlist = new TorrentListPragment();
-				return torrentlist;
+				 if(torrentlist == null){
+					 torrentlist = new TorrentListPragment();
+				 }
+				 return torrentlist;
+//				return new TorrentListPragment();
 			case 1:return SuperAwesomeCardFragment.newInstance(position);
 			case 2:return SuperAwesomeCardFragment.newInstance(position);
 			case 3:return SuperAwesomeCardFragment.newInstance(position);
 			}
 			return null;
 		}
+//		
+//		@Override
+//		public void destroyItem(ViewGroup container, int position, Object object){
+//			container.removeView((View) object);
+//		}
+//		
+//		@Override
+//		public boolean isViewFromObject(View view, Object object) {
+//			return view == object;
+//		}
 	}
 	
 	@Override
