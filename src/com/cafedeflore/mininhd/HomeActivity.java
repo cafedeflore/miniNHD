@@ -22,10 +22,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
-import com.cafedeflore.mininhd.fragment.TorrentListPragment;
+import com.cafedeflore.mininhd.fragment.TorrentListFragment;
+import com.cafedeflore.mininhd.fragment.TypeListFragment;
 
 public class HomeActivity extends FragmentActivity{
 	private final Handler handler = new Handler();
+	
+	private MyApp myApp;
 	
 	private PagerSlidingTabStrip tabs;
 	private ViewPager pager;
@@ -37,7 +40,7 @@ public class HomeActivity extends FragmentActivity{
 	private static Boolean isExit = false;
     private static Boolean hasTask = false;
     
-    TorrentListPragment torrentlist = null;
+    TorrentListFragment torrentlist = null;
     Timer tExit = new Timer();
     TimerTask task = new TimerTask() {
 
@@ -52,6 +55,8 @@ public class HomeActivity extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		
+		myApp = (MyApp)getApplication();
 		
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		pager = (ViewPager) findViewById(R.id.pager);
@@ -165,7 +170,7 @@ public class HomeActivity extends FragmentActivity{
 	
 	public class MyPagerAdapter extends FragmentPagerAdapter {
 
-		private final String[] TITLES = { "个人信息", "资源种子", "我的订阅", "首页推荐"};
+		private final String[] TITLES = { "个人信息", "资源种子", "分类资源", "我的订阅"};
 
 		public MyPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -186,13 +191,15 @@ public class HomeActivity extends FragmentActivity{
 //			return SuperAwesomeCardFragment.newInstance(position);
 			switch(position){
 			case 0:
-				 if(torrentlist == null){
-					 torrentlist = new TorrentListPragment();
-				 }
-				 return torrentlist;
+//				 if(torrentlist == null){
+//					 torrentlist = new TorrentListFragment(myApp);
+//				 }
+//				 return torrentlist;
+				return SuperAwesomeCardFragment.newInstance(position);
 //				return new TorrentListPragment();
-			case 1:return SuperAwesomeCardFragment.newInstance(position);
-			case 2:return SuperAwesomeCardFragment.newInstance(position);
+			case 1:return TorrentListFragment.newInstance(myApp);
+			case 2:return new TypeListFragment();
+				//return SuperAwesomeCardFragment.newInstance(position);
 			case 3:return SuperAwesomeCardFragment.newInstance(position);
 			}
 			return null;

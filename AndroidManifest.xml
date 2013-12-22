@@ -16,6 +16,7 @@
         android:name=".MyApp">
         <activity
             android:name="com.cafedeflore.mininhd.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cafedeflore.mininhd.HomeActivity"></activity>
+        <activity android:name="com.cafedeflore.mininhd.HomeActivity"
+            android:screenOrientation="portrait" ></activity>
+         <activity android:name="com.cafedeflore.mininhd.BoardActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

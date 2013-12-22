@@ -17,10 +17,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.cafedeflore.libNHD.NHDException;
+import com.cafedeflore.mininhd.MyApp;
+
 public class httpClientLoginUtils implements Runnable{
 	
 	private String url;
 	private DefaultHttpClient client = null;
+	private MyApp myApp = null;
 	
 	private String username;
 	private String password;
@@ -28,12 +32,13 @@ public class httpClientLoginUtils implements Runnable{
 	public String result;
 	public String encode;
 	
-	public httpClientLoginUtils(String username, String password, DefaultHttpClient client){
+	public httpClientLoginUtils(String username, String password, DefaultHttpClient client, MyApp myApp){
 		this.url = "http://www.nexushd.org/takelogin.php";
 		this.client = client;
 		this.username = username;
 		this.password = password;
 		encode = "utf-8";
+		this.myApp = myApp;
 	}
 	
 	public String getResult(){
@@ -41,7 +46,7 @@ public class httpClientLoginUtils implements Runnable{
 	}
 	
 	@Override
-	public void run() {
+	public void run(){
 		// TODO Auto-generated method stub
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("username", username);
@@ -55,9 +60,11 @@ public class httpClientLoginUtils implements Runnable{
 		String res = sendHttpClientPost(url, params, "utf-8");
 		if (res.contains("用户名或密码不正确")){
 			System.out.println("登录失败");
+			myApp.setFlag(1);
 		}
 		else{
 			System.out.println("登录成功");
+			myApp.setFlag(0);
 		}
 		this.result = res;
 	}

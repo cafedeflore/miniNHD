@@ -1,5 +1,6 @@
 package com.cafedeflore.mininhd;
 
+import com.cafedeflore.libNHD.NHDException;
 import com.cafedeflore.libNHD.NHDservice;
 import com.cafedeflore.mininhd.MyApp;
 import com.cafedeflore.mininhd.R;
@@ -35,6 +36,7 @@ public class LoginActivity extends Activity {
 		myApp.setUsernamePassword("lala1", "haha1");
 		nhdService.setApplication(myApp);
 		myApp.setUsernamePassword("lala2", "haha2");
+		myApp.setNhdService(nhdService);
 		
 		btnView.setOnClickListener(new View.OnClickListener() {
 			
@@ -44,7 +46,12 @@ public class LoginActivity extends Activity {
 				String un=username.getText().toString().trim();
 				String pw=password.getText().toString().trim();
 				
-				nhdService.postRequest("http");
+				try {
+					nhdService.postRequest("http");
+				} catch (NHDException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, HomeActivity.class);
 				System.out.println("starting new activity");
@@ -55,18 +62,26 @@ public class LoginActivity extends Activity {
 		
 		btnLogin.setOnClickListener(new View.OnClickListener() {
 				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					String un=username.getText().toString();
-					String pw=password.getText().toString();
-//					un = "cafedeflore";
-//					pw = "left1bank";
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String un=username.getText().toString();
+				String pw=password.getText().toString();
+				
+				nhdService.setApplication(myApp);
+				try {
 					nhdService.login(un, pw);
-					
-					//new Thread(new httpClientUtils(un,pw,MainActivity.this )).start();
+					Intent intent = new Intent();
+					intent.setClass(LoginActivity.this, HomeActivity.class);
+					System.out.println("starting new activity");
+					startActivity(intent);
+					finish();
+				} catch (NHDException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
+			}
+		});
 	}
 	
 	@Override

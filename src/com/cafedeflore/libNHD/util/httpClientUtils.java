@@ -9,32 +9,48 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.cafedeflore.mininhd.MyApp;
+
 public class httpClientUtils implements Runnable{
 	
 	private String url;
 	private DefaultHttpClient client = null;
+	private MyApp myApp = null;
 	
 	public String result;
 	public String encode;
 	
-	public httpClientUtils(String url, DefaultHttpClient client){
+	public httpClientUtils(String url, DefaultHttpClient client, MyApp myApp){
 		this.url = url;
 		this.client = client;
 		encode = "utf-8";
+		this.myApp = myApp;
 	}
 	
 	public String getResult(){
 		return result;
 	}
 	
+	/**
+	 * @return the myApp
+	 */
+	public MyApp getMyApp() {
+		return myApp;
+	}
+
+	/**
+	 * @param myApp the myApp to set
+	 */
+	public void setMyApp(MyApp myApp) {
+		this.myApp = myApp;
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
 		if(client == null){
 			return ; //TODO throw error
 		}
-		
 		HttpPost httpPost = new HttpPost(url);
 		HttpResponse httpResponse = null;
 		try {
@@ -50,13 +66,17 @@ public class httpClientUtils implements Runnable{
 		try {
 			inputStream = httpResponse.getEntity().getContent();
 			result = changeInputStream(inputStream, encode);
-			System.out.println(result);
+			//System.out.println(result);
 			System.out.println("in the thread~~~~~~~~~~");
+			myApp.setFlag(0);
+			myApp.setResult(result);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
+			myApp.setFlag(1);
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			myApp.setFlag(2);
 			e.printStackTrace();
 		}
 	}
