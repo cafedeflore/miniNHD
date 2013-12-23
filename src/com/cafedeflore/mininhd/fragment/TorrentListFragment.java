@@ -104,19 +104,19 @@ public class TorrentListFragment extends Fragment implements OnRefreshListener<L
 				// TODO Auto-generated method stub
 				System.out.println(arg2+ " ");// + arg3);	//结果证明两个值一样大...不科学,表index： 0~n-1
 				//System.out.println(data.get(arg2).toString());
+				System.out.println(torrentList.get(arg2).getDownloadUrl());
+				try {
+					myApp.getNhdService().getRequest(torrentList.get(arg2).getDownloadUrl());
+				} catch (NHDException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		mPullRefreshListView.setOnRefreshListener(this);
 		new GetDataTask().execute();
 	}
 
-//	@Override
-//	public PullToRefreshListView onCreatePullToRefreshListView(LayoutInflater inflater, Bundle savedInstanceState){
-//		
-////		v.setText("CARD " + (1));
-//		
-//		return mPullRefreshListView;
-//	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -58,12 +58,14 @@ public class httpClientLoginUtils implements Runnable{
 		}
 		
 		String res = sendHttpClientPost(url, params, "utf-8");
+//		System.out.println(res);
 		if (res.contains("用户名或密码不正确")){
 			System.out.println("登录失败");
 			myApp.setFlag(1);
 		}
 		else{
 			System.out.println("登录成功");
+			myApp.updateProfile(res);
 			myApp.setFlag(0);
 		}
 		this.result = res;

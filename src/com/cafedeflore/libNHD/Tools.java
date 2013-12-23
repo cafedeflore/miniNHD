@@ -67,6 +67,11 @@ public class Tools {
 		if(finished.text() != null)
 			torrentEntity.setCompleteNumber(Integer.parseInt(finished.text().replace(",", "")));
 		
+		//downloadUrl
+		Element url = torrent.child(1);
+		url.select("img[class=download]").first().parent();
+		torrentEntity.setDownloadUrl( "http://www.nexushd.org/" + url.select("img[class=download]").first().parent().attr("href").toString());
+		
 		return "";
 	}
 }

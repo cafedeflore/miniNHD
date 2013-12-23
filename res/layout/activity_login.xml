@@ -42,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="180dp"
-            android:text="left1bank" />
+            android:password="true"
+            android:text="123456" />
     </LinearLayout>
 
     <Button
@@ -50,10 +51,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="登录" />
-    <Button
-        android:id="@+id/btnView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="种子" />
 
 </LinearLayout>

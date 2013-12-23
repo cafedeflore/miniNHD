@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -86,6 +88,24 @@ public final class BoardActivity extends ListActivity {
 
 				// Do work to refresh the list here.
 				new GetDataTask().execute();
+			}
+		});
+		
+		mPullRefreshListView.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				System.out.println(arg2+ " ");// + arg3);	//结果证明两个值一样大...不科学,表index： 0~n-1
+				//System.out.println(data.get(arg2).toString());
+				System.out.println(torrentList.get(arg2).getDownloadUrl());
+				try {
+					myApp.getNhdService().getRequest(torrentList.get(arg2).getDownloadUrl());
+				} catch (NHDException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 

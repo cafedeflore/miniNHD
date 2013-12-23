@@ -2,6 +2,7 @@ package com.cafedeflore.mininhd;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
+import com.cafedeflore.mininhd.fragment.ProfileFragment;
 import com.cafedeflore.mininhd.fragment.TorrentListFragment;
 import com.cafedeflore.mininhd.fragment.TypeListFragment;
 
@@ -35,7 +37,7 @@ public class HomeActivity extends FragmentActivity{
 	private MyPagerAdapter adapter;
 	
 	private Drawable oldBackground = null;
-	private int currentColor = 0xFF666666;
+	private int currentColor = 0xFF96AA39;
 	
 	private static Boolean isExit = false;
     private static Boolean hasTask = false;
@@ -73,18 +75,16 @@ public class HomeActivity extends FragmentActivity{
 		tabs.setViewPager(pager);
 		
 		changeColor(currentColor);
+		changeColor(currentColor);
 //		@Override
 //		public boolean onCreateOptionsMenu(Menu menu) {
 //			getMenuInflater().inflate(R.menu.main, menu);
 //			return true;
 //		}
 		
-		
-		
 	}
 	
 	private void changeColor(int newColor) {
-
 		tabs.setIndicatorColor(newColor);
 
 		// change ActionBar color just if an ActionBar is available
@@ -170,7 +170,7 @@ public class HomeActivity extends FragmentActivity{
 	
 	public class MyPagerAdapter extends FragmentPagerAdapter {
 
-		private final String[] TITLES = { "个人信息", "资源种子", "分类资源", "我的订阅"};
+		private final String[] TITLES = { "个人信息", "资源种子", "分类资源"};//, "我的订阅"};
 
 		public MyPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -195,7 +195,8 @@ public class HomeActivity extends FragmentActivity{
 //					 torrentlist = new TorrentListFragment(myApp);
 //				 }
 //				 return torrentlist;
-				return SuperAwesomeCardFragment.newInstance(position);
+//				return SuperAwesomeCardFragment.newInstance(position);
+				return ProfileFragment.newInstance(myApp);
 //				return new TorrentListPragment();
 			case 1:return TorrentListFragment.newInstance(myApp);
 			case 2:return new TypeListFragment();

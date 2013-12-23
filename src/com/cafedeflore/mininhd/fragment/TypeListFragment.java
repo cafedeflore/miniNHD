@@ -45,7 +45,6 @@ public class TypeListFragment extends Fragment{
 		gridView = new GridView(getActivity());
 		//gridView.setId(R.layout.type_list);
 		gridView.setBackgroundResource(R.drawable.background_card);
-		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < resIds.length; i++) {
 			Map<String, Object> cell = new HashMap<String, Object>();
@@ -86,5 +85,4 @@ public class TypeListFragment extends Fragment{
 		}
 		return gridView;
 	}
-	
 }

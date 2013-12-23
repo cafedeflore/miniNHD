@@ -27,7 +27,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		btnLogin=(Button)findViewById(R.id.btnLogin);
-		btnView=(Button)findViewById(R.id.btnView);
+//		btnView=(Button)findViewById(R.id.btnView);
 		username=(EditText)findViewById(R.id.editText1);
 		password=(EditText)findViewById(R.id.editText2);
 		
@@ -38,27 +38,29 @@ public class LoginActivity extends Activity {
 		myApp.setUsernamePassword("lala2", "haha2");
 		myApp.setNhdService(nhdService);
 		
-		btnView.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String un=username.getText().toString().trim();
-				String pw=password.getText().toString().trim();
-				
-				try {
-					nhdService.postRequest("http");
-				} catch (NHDException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Intent intent = new Intent();
-				intent.setClass(LoginActivity.this, HomeActivity.class);
-				System.out.println("starting new activity");
-				startActivity(intent);
-				finish();
-			}
-		});
+		myApp.setFilePath(getFilesDir().toString());
+//		
+//		btnView.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				String un=username.getText().toString().trim();
+//				String pw=password.getText().toString().trim();
+//				
+//				try {
+//					nhdService.postRequest("http");
+//				} catch (NHDException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				Intent intent = new Intent();
+//				intent.setClass(LoginActivity.this, HomeActivity.class);
+//				System.out.println("starting new activity");
+//				startActivity(intent);
+//				finish();
+//			}
+//		});
 		
 		btnLogin.setOnClickListener(new View.OnClickListener() {
 				

@@ -20,6 +20,8 @@ public class TorrentEntity implements Serializable{
 	private int completeNumber = 0;
 	private String uploader = "";
 	
+	private String downloadUrl = "";
+	
 	/**
 	 * @return the type
 	 */
@@ -43,6 +45,18 @@ public class TorrentEntity implements Serializable{
 	 */
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	/**
+	 * @return the downloadUrl
+	 */
+	public String getDownloadUrl() {
+		return downloadUrl;
+	}
+	/**
+	 * @param downloadUrl the downloadUrl to set
+	 */
+	public void setDownloadUrl(String downloadUrl) {
+		this.downloadUrl = downloadUrl;
 	}
 	/**
 	 * @return the secondTitle

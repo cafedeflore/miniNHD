@@ -2,6 +2,7 @@ package com.cafedeflore.libNHD;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.cafedeflore.libNHD.util.httpClientDownload;
 import com.cafedeflore.libNHD.util.httpClientLoginUtils;
 import com.cafedeflore.libNHD.util.httpClientUtils;
 import com.cafedeflore.mininhd.MyApp;
@@ -31,6 +32,22 @@ public class NHDservice {
 	public String postRequest(String path) throws NHDException{
 		DefaultHttpClient client = myApp.getClient();
 		Thread t = new Thread(new httpClientUtils(path, client, myApp));
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(myApp.getFlag() != 0){
+			throw new NHDException("Ê§°Ü1");
+		}
+		return myApp.getResult();
+	}
+	
+	public String getRequest(String path) throws NHDException{
+		DefaultHttpClient client = myApp.getClient();
+		Thread t = new Thread(new httpClientDownload(path, client, myApp));
 		t.start();
 		try {
 			t.join();
